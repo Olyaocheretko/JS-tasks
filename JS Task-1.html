@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS task-1</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        Перебрать элементы массива, произвести проверку на NaN. Если элемент является NaN, заменить его на null.
+        По завершению цикла вывести в консоль сообщение ‘Проверка и изменение массива завершена’ и получившийся массив на следующей строке.
+        •	Реализовать с помощью цикла for
+        •	Реализовать с помощью цикла while
+        Пример массива для преобразований:
+        [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
+        */
+        console.log("Task-1")
+
+        var baseArray = [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
+        console.log("Base array:")
+        console.log(baseArray)
+
+        var updatedArray = changeNaNItemViaFor(baseArray)
+        console.log("Array after changing NaN to null via for:")
+        console.log(updatedArray)
+
+        var updatedArrayViaWhile = changeNaNItemViaWhile(baseArray)
+        console.log("Array after changing NaN to null via while:")
+        console.log(updatedArrayViaWhile)
+
+        function changeNaNItemViaFor(arrayItems) {
+            for (var i = 0; i < arrayItems.length; i++) {
+                if (isNaN(arrayItems[i])) {
+                    arrayItems[i] = null
+                }
+            }
+            return arrayItems
+        }
+
+        function changeNaNItemViaWhile(arrayItems) {
+            var i = 0
+            while(i < arrayItems.length) {
+                if (isNaN(arrayItems[i])) {
+                    arrayItems[i] = null
+                }
+                i++
+            }
+            return arrayItems
+        }
+
+        console.log("")
+
+
+        /*
+        Задача №2
+        Перебрать массив, посчитать сколько в массиве чисел кратных трем и вывести в консоль сообщение ‘В данном массиве n чисел кратных 3’,
+        если они есть.
+        Если нет чисел кратных 3, вывести сообщение ‘В данном массиве нет чисел кратных 3’
+        n – количество чисел
+        Пример массива:
+        [45, '246', 73, '4', 15, 36, 17, 89, '49', 167, 123]
+        •	Использовать темплейтный литерал
+        •	Реализовать с помощью цикла for
+        •	Реализовать с помощью цикла while
+        */
+        console.log("Task-2")
+
+        var numberArray = [45, '246', 73, '4', 15, 36, 17, 89, '49', 167, 123]
+        console.log("Base array:")
+        console.log(numberArray)
+
+        var divider = 3
+        var count = getDividableElementsCountViaFor(divider, numberArray)
+        if (count === 0) {
+            console.log(`There are no items dividable on ${divider} in this array (via for)`)
+        } else {
+            console.log(`There are ${count} items dividable on ${divider} in this array (via for)`)
+        }
+
+        var countViaWhile = getDividableElementsCountViaWhile(divider, numberArray)
+        if (countViaWhile === 0) {
+            console.log(`There are no items dividable on ${divider} in this array (via while)`)
+        } else {
+            console.log(`There are ${countViaWhile} items dividable on ${divider} in this array (via while)`)
+        }
+
+        function getDividableElementsCountViaFor(divider, arrayItems) {
+            var count = 0
+            var numberItem
+            for (var i = 0; i < arrayItems.length; i++) {
+                numberItem = Number(arrayItems[i])
+                if (numberItem % divider === 0) {
+                    count++
+                }
+            }
+            return count
+        }
+
+        function getDividableElementsCountViaWhile(divider, arrayItems) {
+            var count = 0
+            var numberItem
+            var i = 0
+            while(i < arrayItems.length) {
+                numberItem = Number(arrayItems[i])
+                if (numberItem % divider === 0) {
+                    count++
+                }
+                i++
+            }
+            return count
+        }
+
+        console.log("")
+
+
+        /*
+        Задача №3
+        Написать функцию, которая принимает в качестве входного параметра массив, в котором находятся элементы следующих типов:
+        строка, число, логическое значение(булиан), null и объект.
+        Посчитать количество элементов каждого типа и вывести в консоль в следующем формате:
+        •	String: n
+        •	Number: n
+        •	Boolean: n
+        •	Null: n
+        •	Object: n
+        n – число элементов этого типа в массиве
+        Пример массива:
+        [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
+        */
+        console.log("Task-3")
+
+        var arrayOfItems = [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
+        console.log("Base array:")
+        console.log(arrayOfItems)
+
+        outputItemsQuantity(arrayOfItems)
+
+        function outputItemsQuantity(array) {
+            var stringCount = 0
+            var numberCount = 0
+            var booleanCount = 0
+            var nullCount = 0
+            var objectCount = 0
+
+            for (var item = 0; item < array.length; item++) {
+                switch (typeof array[item]) {
+                    case "string": {
+                        stringCount ++
+                        break
+                    }
+                    case "number": {
+                        numberCount ++
+                        break
+                    }
+                    case "boolean": {
+                        booleanCount ++
+                        break
+                    }
+                    case "object": {
+                        if(array[item] === null) {
+                            nullCount ++
+                        } else {
+                            objectCount ++
+                        }
+                        break
+                    }
+                    default: {
+                        console.log('There is no required items in the area')
+                        break
+                    }
+                }
+            }
+            console.log(`String: ${stringCount}`)
+            console.log(`Number: ${numberCount}`)
+            console.log(`Boolean: ${booleanCount}`)
+            console.log(`Null: ${nullCount}`)
+            console.log(`Object: ${objectCount}`)
+        }
+
+        console.log("")
+
+
+        /*
+        Задача №4
+        Написать функцию, которая принимает два аргумента.
+        Первый аргумент - имя пользователя (строка).
+        Второй аргумент – сообщение приветствия. Функция должна возвращать строку, объединяющую имя и сообщения приветствия.
+        •	Реализовать функцию используя function declaration
+        •	Реализовать функцию используя function expression
+        •	Использовать оператор return*!/
+        */
+        console.log("Task-4")
+
+        var name = prompt("Please enter name")
+        var message = prompt("Please enter greeting message", "Hello")
+
+        var getFullMessageViaFunctionExpression = function(name, message) {
+            return message + ", " + name
+        }
+
+        console.log("Greeting message via function expression: " + getFullMessageViaFunctionExpression(name, message))
+        console.log("Greeting message via function declaration: " + getFullMessageViaFunctionDeclaration(name, message))
+
+        function getFullMessageViaFunctionDeclaration(name, message) {
+            return message + ", " + name
+        }
+
+        console.log("")
+    </script>
+</body>
+</html>
