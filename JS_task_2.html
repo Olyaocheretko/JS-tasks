@@ -25,16 +25,15 @@
         console.log('Task-1')
 
         var user = {
-            name: 'Irina'
-        }
-        user.sayHello = function(greetingMessage = 'Good day') {
-            if (typeof this.name !== 'string' || typeof this.name === 'undefined' || this.name.length === 0) {
-                console.log('User name is not defined')
-            } else {
-                return `${greetingMessage}, ${this.name}`
+            name: 'Irina',
+            sayHello: function(greetingMessage = 'Good day') {
+                if (typeof this.name !== 'string' || typeof this.name === 'undefined' || this.name.length === 0) {
+                    console.log('User name is not defined')
+                } else {
+                    return `${greetingMessage}, ${this.name}`
+                }
             }
         }
-
         var message = 'Nice to meet you'
         console.log(user.sayHello(message))
 
@@ -74,19 +73,35 @@
         И выводит в консоль список любимых уроков для каждого студента.
         Внутри функции ‘showStudentsFavoriteLessons’ создать массив ‘lessons’ и функцию ‘checkStudentFavoriteLessons’.
         Массив ‘lessons’ будет состоять из строк (названий уроков).
-        Пример массива ‘lessons’:
-        ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']
+        Пример массива ‘lessons’: ['Математика', 'История', 'Спорт', 'Литература', 'Биология', 'География']
         Функция ‘checkStudentFavoriteLessons’ в качестве аргумента будет принимать имя студента.
-        В функции из массива ‘lessons’ нужно выбрать последние n элементов (где n – это случайное число) и поместить массив этих элементов в переменную ‘favoriteLessons’ Если в массиве есть хоть один элемент, то вернуть строку, в которой сначала будет имя студента, двоеточие и все элементы из массива ‘favoriteLessons’ через запятую. Если в массиве ‘favoriteLessons’ нет элементов, то вернуть строку с именем студента и сообщением ‘У этого студента нет любимых предметов’.
+        В функции из массива ‘lessons’ нужно выбрать последние n элементов (где n – это случайное число) и поместить массив этих элементов в переменную ‘favoriteLessons’
+        Если в массиве есть хоть один элемент, то вернуть строку, в которой сначала будет имя студента, двоеточие и все элементы из массива ‘favoriteLessons’ через запятую.
+        Если в массиве ‘favoriteLessons’ нет элементов, то вернуть строку с именем студента и сообщением ‘У этого студента нет любимых предметов’.
         Один вызов функции должен выводить сообщения сразу для всех студентов.
         */
-        /*console.log('Task-3')
+        console.log('Task-3')
 
-        function showStudentsFavoriteLessons(studentsName) {
+        showStudentsFavoriteLessons('Pasha', 'Petya', 'Vasya', 'Igor', 'Irina')
 
+        function showStudentsFavoriteLessons() {
+            for (var i = 0; i < arguments.length ; i++) {
+                console.log(checkStudentFavoriteLessons(arguments[i]))
+            }
         }
 
-        console.log('')*/
+        function checkStudentFavoriteLessons(studentName) {
+            var lessons = ['Mathematics', 'History', 'Sports','Literature','Biology','Geography']
+            var lessonsCount = Math.floor(Math.random() * lessons.length)
+            var favoriteLessons = lessons.slice(lessonsCount * -1)
+
+            if (lessonsCount === 0) {
+                return `${studentName}: This student has no favorite lessons`
+            }
+            return `${studentName}: ${favoriteLessons.join(', ')}`
+        }
+
+        console.log('')
     </script>
 </body>
 </html>
