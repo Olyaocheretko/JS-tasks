@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_3</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        Написать функцию, которая в качестве формальных параметров принимает неограниченное количество аргументов.
+        В функции произвести проверку является ли переданный аргумент массивом.
+        Из аргументов, которые являются массивами, сделать один общий массив.
+
+        Добавить строку ‘Start’ в начало массива, строку ‘The End’ в конец массива.
+        Вернуть результирующий массив в обратной последовательности (Первый элемент – последний, а последний - первый).
+        Пример аргументов: Null, 123, ‘JS’, [‘Nastya’, ‘Dima’, ‘Max’, ‘Masha’], undefined, {}, true, [‘Sasha’, ‘Denis’, ‘Marina’]
+         */
+        console.log('Task-1')
+
+        console.log('Reversed array arguments:')
+        console.log(getChangedArray(null, 123, 'JS', ['Nastya', 'Dima', 'Max', 'Masha'], undefined, {}, true,['Sasha', 'Denis', 'Marina']))
+
+        function getChangedArray() {
+            var newArray = []
+
+            for (var i = 0; i < arguments.length ; i++) {
+                if (Array.isArray(arguments[i])) {
+                    newArray = newArray.concat(arguments[i])
+                }
+            }
+            newArray.unshift('Start')
+            newArray.push('The End')
+            newArray.reverse()
+            return newArray
+        }
+
+        console.log('')
+        /*
+        Задача №2
+        Написать функцию, которая в качестве аргументов принимает два массива, первый – массив чисел, второй – массив строк.
+        Производит проверку равна ли длинная первого массива, длине второго массива.
+        Если результат отрицательный, то вернуть строку “Массивы имеют разную длину”.
+
+        Если результат положительный, то отсортировать массив чисел по возрастанию и с помощью метода splice добавить
+        все элементы массива со строками в середину массива с числами (чтобы в результате получился одномерный массив).
+        Вернуть первую половину результирующего массива используя метод slice.
+        Пример массивов:
+        [73, 4, 11, 234, 58, 134]
+        ['js', 'css', 'jq’, ‘html’, ‘vue’, ‘bootstrap’]
+        */
+        console.log('Task-2')
+
+        var numberArray = [73, 4, 11, 234, 58, 134]
+        console.log('Base number array:')
+        console.log(numberArray)
+
+        var stringArray = ['js', 'css', 'jq', 'html', 'vue', 'bootstrap']
+        console.log('Base string array:')
+        console.log(stringArray)
+
+        console.log('Result:')
+        console.log(getHandledArray(numberArray, stringArray))
+
+        function getHandledArray(numberArray, stringArray) {
+            if (numberArray.length !== stringArray.length) {
+                return 'Arrays have different lengths'
+            }
+            numberArray.sort((a, b) => a - b);
+           /* console.log('Sorted number array:')
+            console.log(numberArray)*/
+
+            var averagePositionInNumberArray = numberArray.length/2
+
+            var mergedArray = numberArray.slice()
+            mergedArray.splice(averagePositionInNumberArray, 0, stringArray)
+            mergedArray = mergedArray.flat();
+           /* console.log('Merged array:')
+            console.log(mergedArray)*/
+
+           /* console.log('Final array:')*/
+            return mergedArray.slice(0, mergedArray.length/2)
+        }
+
+        console.log('')
+        /*
+        Задача №3
+        Написать функцию, которая принимает в качестве аргумента строку произвольной длины и число (n) – до какого символа обрезать строку.
+        Реализуйте сравнение длины строки и переданного вторым аргументом числа.
+        Если длина строки превышает n, то вернуть строку, состоящую из первых n символов строки и добавить троеточия в конце.
+        Если меньше, вернуть начальную строку, в которой, заменены все пробелы на “-” и первая и последняя буквы являются заглавными.
+        */
+        console.log('Task-3')
+
+        var baseString = 'this is a string'
+        console.log('Base string:')
+        console.log(baseString)
+        var cutNumber = 16
+
+        console.log('Result:')
+        console.log(getChangedString(baseString, cutNumber))
+
+        function getChangedString (baseString, cutNumber) {
+            if (baseString.length > cutNumber) {
+                var shortString = baseString.slice(0, cutNumber - 1)
+                shortString = shortString + '...'
+                return shortString
+            }
+            var changedString = baseString.replace(/ /g, '-');
+            changedString = changedString[0].toUpperCase() + changedString.slice(1)
+            changedString = changedString.slice(0, changedString.length - 1) + changedString[changedString.length - 1].toUpperCase()
+            return changedString
+        }
+
+        console.log('')
+        /*
+        Задача №4
+        Напишите функцию, которая принимает первым аргументом фразу, а вторым аргументом – слово (часть заданной фразы).
+        Вырежьте из фразы заданное слово и верните строку которая осталась.
+        Реализовать тремя различными способами:
+        •	Substr
+        •	Substring
+        •	Slice
+        */
+        console.log('Task-4')
+
+        var phrase = 'this phrase is good'
+        var searchedWord = 'phrase'
+
+        console.log(`Base string: ${phrase}`)
+        console.log(`Changed string via Substr: ${getNewStringViaSubstr(phrase, searchedWord)}`)
+        console.log(`Changed string via Substring: ${getNewStringViaSubstring(phrase, searchedWord)}`)
+        console.log(`Changed string via Slice: ${getNewStringViaSlice(phrase, searchedWord)}`)
+
+        function getNewStringViaSubstr(phrase, searchedWord) {
+            var searchedWordPosition = phrase.indexOf(searchedWord)
+            var searchedWordLength = searchedWord.length
+
+            return phrase.substr(0, searchedWordPosition) + phrase.substr(searchedWordPosition + searchedWordLength + 1)
+       }
+
+        function getNewStringViaSubstring(phrase, searchedWord) {
+            var searchedWordPosition = phrase.indexOf(searchedWord)
+            var searchedWordLength = searchedWord.length
+
+            return phrase.substring(0, searchedWordPosition) + phrase.substring(searchedWordPosition + searchedWordLength + 1)
+        }
+
+        function getNewStringViaSlice(phrase, searchedWord) {
+            var searchedWordPosition = phrase.indexOf(searchedWord)
+            var searchedWordLength = searchedWord.length
+
+            return phrase.slice(0, searchedWordPosition) + phrase.slice(searchedWordPosition + searchedWordLength + 1)
+        }
+
+        console.log('')
+    </script>
+</body>
+</html>
