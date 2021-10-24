@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_4</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        Напишите функцию, которая возвращает количество своих вызовов
+        •Переменная счётчика должна быть внутри функции
+        •Реализовать с помощью замыкания
+        */
+        console.log('Task-1')
+
+        var getCallsCount = getCounter();
+        console.log(getCallsCount());
+        console.log(getCallsCount());
+        console.log(getCallsCount());
+
+        function getCounter() {
+            var count = 0;
+
+            return function () {
+                count++;
+                return count;
+            };
+        }
+
+        console.log('')
+        /*
+        Задача №2
+        Напишите функцию, которая будет создавать случайное число в диапазоне от 1 до 50 при каждом вызове.
+        Для сохранения числа, создайте результирующий массив.
+        Этот массив, должен быть доступен только для функции, которая создаёт случайные числа.
+        Добавляйте в него только уникальные числа и возвращайте результирующий массив, если созданное функцией число было уникальным и попало в массив.
+        Если созданное функцией число уже есть в массиве, то возвращайте строку "Это число уже есть в массиве!".
+        Реализовать с помощью замыкания
+        */
+        console.log('Task-2')
+
+        generateRandomNumber = getGenerator()
+        for (var i = 0; i < 10; i++) {
+            console.log(generateRandomNumber())
+            console.log('')
+        }
+
+        function getGenerator() {
+            var uniqueRandomNumbers = []
+            var min = Math.ceil(1)
+            var max = Math.floor(50)
+
+            return function () {
+                var number = Math.floor(Math.random() * max) + min
+                if (uniqueRandomNumbers.indexOf(number) === -1) {
+                    uniqueRandomNumbers.push(number)
+                    return uniqueRandomNumbers
+                }
+
+                return `Number ${number} already exists in array!`
+            }
+        }
+
+        console.log('')
+    </script>
+</body>
+</html>
