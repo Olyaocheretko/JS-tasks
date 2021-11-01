@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_5</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        Создайте IIFE, которое получает пароль в аргументе и возвращает внутреннюю функцию,
+        которая в качестве аргумента принимает введенную строку и возвращает булево значение true,
+        если введенная строка совпадает с паролем и false – если не совпадает.
+        Для сохранения результата IIFE создайте переменную checkPassword.
+        */
+        console.log('Task-1')
+
+        var password = 'mypass1234'
+        var checkPassword = ((function(pass) {
+            return function(passwordForCheck) {
+               return passwordForCheck === pass
+            }
+        })(password))
+
+        console.log(checkPassword(prompt('Please enter your password')))
+
+        console.log('')
+        /*
+        Задача №2
+        Создайте IIFE, которое получает число n (начальное значение) в качестве аргумента родительской функции и возвращает функцию,
+        которая получает число, прибавляет его к n, которое находится в замыкании, и возвращает результат.
+        Для сохранения результата IIFE создайте переменную addeter.
+        */
+        console.log('Task-2')
+
+        var addeter = ((function(n) {
+            return function(number) {
+                return n + number
+            }
+        })(+prompt('Please enter the first number (n)')))
+
+        console.log(addeter(+prompt('Please enter a second number')))
+
+        console.log('')
+        /*
+        Задача №3
+        Создайте IIFE, которое вернёт функцию, у которой в замыкании будет переменная counter со значением 10.
+        Сделайте так, чтобы каждый вызов возвращённой функции уменьшал это число на 1 и выводил на экран уменьшенное число.
+        Добавьте функционал, чтобы отсчет доходил до 0,
+        а затем каждый последующий вызов функции выводил на экран сообщение о том, что отсчет окончен.
+        */
+        console.log('Task-3')
+
+        var decreasedNumber = ((function() {
+            var counter = 10
+
+            return function() {
+                var message = counter ?  --counter : 'The counting is over'
+                console.log(message)
+            }
+        })())
+
+        for (var i = 0; i <= 12; i++) {
+            decreasedNumber()
+        }
+
+        console.log('')
+        /*
+        Задача №4
+        Напишите функцию, которая в качестве единственного аргумента принимает массив чисел
+        и возвращает сумму чисел этого массива.
+        Реализовать с помощью рекурсии.
+        */
+        console.log('Task-4')
+
+
+        console.log('')
+        /*
+        Задача №5
+        Напишите функцию, которая в качестве аргументов принимает два числа.
+        Первое число – начало диапазона. Второе число – конец диапазона.
+        Вернуть строку всех целых чисел из этого диапазона через запятую.
+        Реализовать с помощью рекурсии
+        */
+        console.log('Task-5')
+
+        console.log('')
+        /*
+        Задача №6
+        Напишите функцию, которая принимает массив из последовательности чисел и возвращает максимальное число.
+        Реализовать с помощью рекурсии
+        */
+        console.log('Task-6')
+
+        console.log('')
+        /*
+        Задача №7
+        Создать объект пользователя со следующими полями:
+        •	firstName
+        •	lastName
+        •	birthday
+        Значения полей указать произвольное. Реализовать следующие геттеры и сеттеры:
+        •	геттер fullName - возвращает конкатенированную строку, состоящую из firstName и lastName
+        •	сеттер fullName - устанавливает значения в поля firstName и lastName
+        •	геттер age - возвращает количество лет от даты указанной в birthday, до текущего дня.
+        •	сеттер age - изменяет год в поле birthday, вычисляя это значение из текущего года и нового значения
+        */
+        console.log('Task-7')
+
+        console.log('')
+        /*
+        Задача №8
+        Создать объект товара со следующими полями:
+        •	name
+        •	id
+        •	price
+        •	discount
+        Значения полей указать произвольное. Реализовать следующие геттеры и сеттеры:
+        •	геттер discountPrice - возвращает цену товара, уменьшенную на количество процентов указанных в поле discount
+        •	сеттер discountPrice - устанавливает значение поля price, увеличивая новое значение на количество процентов указанных в поле discount
+        */
+        console.log('Task-8')
+
+        console.log('')
+    </script>
+</body>
+</html>
