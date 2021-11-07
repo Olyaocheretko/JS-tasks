@@ -19,6 +19,7 @@
         console.log('Task-1')
 
         var password = 'mypass1234'
+
         var checkPassword = ((function(pass) {
             return function(passwordForCheck) {
                return passwordForCheck === pass
@@ -42,7 +43,7 @@
             }
         })(+prompt('Please enter the first number (n)')))
 
-        console.log(addeter(+prompt('Please enter a second number')))
+        console.log(addeter(+prompt('Please enter the second number')))
 
         console.log('')
         /*
@@ -76,6 +77,23 @@
         */
         console.log('Task-4')
 
+        var baseArray = [3, 4, 2, 7]
+
+        console.log('Base array:')
+        console.log(baseArray)
+        
+        console.log('Array sum is:')
+        console.log(arraySum(baseArray))
+
+        function arraySum(baseArray, sum) {
+            sum = sum ? sum : 0
+            if (baseArray.length) {
+                sum += baseArray.pop()
+                return arraySum(baseArray, sum)
+            }
+
+            return sum
+        }
 
         console.log('')
         /*
@@ -87,6 +105,30 @@
         */
         console.log('Task-5')
 
+        var start = 4
+        var end = 7
+
+        console.log('Start is:')
+        console.log(start)
+        console.log('End is:')
+        console.log(end)
+
+        console.log('Range is:')
+        console.log(getRange(start, end))
+
+        function getRange(start, end, range) {
+            if (start > end) {
+                return 'Wrong data'
+            }
+            range = range ? range : ''
+            if (start < end) {
+                range += start++ + ', '
+                return getRange(start, end, range)
+            }
+
+            return range + end
+        }
+
         console.log('')
         /*
         Задача №6
@@ -94,6 +136,24 @@
         Реализовать с помощью рекурсии
         */
         console.log('Task-6')
+
+        var searchArray = [5, 1, 9, 4]
+        console.log('Base array:')
+        console.log(searchArray)
+
+        console.log('Max number is:')
+        console.log(getMax(searchArray))
+
+        function getMax(searchArray, max) {
+            max = max ? max : 0
+            if (searchArray.length) {
+                var item = searchArray.pop()
+                max = item > max ? item : max
+                return getMax(searchArray, max)
+            }
+
+            return max
+        }
 
         console.log('')
         /*
@@ -110,6 +170,56 @@
         */
         console.log('Task-7')
 
+        var user = {
+            firstName: 'Joh',
+            lastName: 'Doe',
+            birthday: new Date(2000, 10, 6), // month numbers start from 0 (10 is November)
+
+            get fullName() {
+                return `${this.firstName} ${this.lastName}`
+            },
+
+            set fullName(fullName) {
+                [this.firstName, this.lastName] = fullName.split(" ")
+            },
+
+            get age() {
+                var now = new Date()
+                var dateNowWithoutTime = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+                var birthdayThisYearWithoutTime = new Date(now.getFullYear(), this.birthday.getMonth(), this.birthday.getDate())
+
+                //age = current year - year of born
+                var age = now.getFullYear() - this.birthday.getFullYear()
+                //if birthday is not come this year, decrement age
+                if (dateNowWithoutTime < birthdayThisYearWithoutTime) {
+                    age--
+                }
+
+                return age
+            },
+
+            set age(age) {
+                var now = new Date()
+                var birthdayYear = now.getFullYear() - age
+
+                var dateNowWithoutTime = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+                var birthdayThisYearWithoutTime = new Date(now.getFullYear(), this.birthday.getMonth(), this.birthday.getDate())
+                if (dateNowWithoutTime < birthdayThisYearWithoutTime) {
+                    birthdayYear--
+                }
+
+                this.birthday.setFullYear(birthdayYear)
+            }
+        }
+
+        console.log(user.fullName)
+        user.fullName = 'Bob Dilan'
+        console.log(user.fullName)
+
+        console.log(user.age)
+        user.age = 4
+        console.log(user.age)
+
         console.log('')
         /*
         Задача №8
@@ -123,6 +233,30 @@
         •	сеттер discountPrice - устанавливает значение поля price, увеличивая новое значение на количество процентов указанных в поле discount
         */
         console.log('Task-8')
+
+        var product = {
+            name: 'Banana',
+            id: 32,
+            price: 32.16,
+            discount: 25.00,
+
+            get discountPrice() {
+                return (this.price * (1 - this.discount/100)).toFixed(2)
+            },
+
+            set discountPrice(discountPrice) {
+                this.price = (discountPrice/(1 - this.discount/100)).toFixed(2)
+            }
+        }
+
+        console.log(product.price)
+        console.log(product.discountPrice)
+
+        console.log('')
+
+        product.discountPrice = 30
+        console.log(product.price)
+        console.log(product.discountPrice)
 
         console.log('')
     </script>
