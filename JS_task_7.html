@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_7</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        С помощью конструктора создайте несколько объектов пользователей с полями name и age.
+        Пример объекта:
+        {name: ‘Max’, age: 21}
+        Отдельно создайте функцию askQuestion, которая принимает в качестве аргументов две строки:
+        •	Строка с приветствием
+        •	Вопрос к пользователю
+        Функция должна возвращать конкатенированную строку, в которой в начале будет приветствие,
+        после будет стоять имя пользователя, которому задается вопрос (использовать this),
+        после чего будет идти вопрос который был задан пользователю.
+        Вызвать этот метод с разными аргументами у нескольких пользователей, используя метод apply().
+        */
+        console.log('Task-1')
+
+        function User(name, age) {
+            this.name = name
+            this.age = +age > 0 ? +age : 1
+        }
+
+        function askQuestion(helloMessage, question) {
+            var name = this.name ?? 'noname'
+
+            return `${helloMessage}, ${name}! ${question}`
+        }
+
+        var firstUser = new User('Jack', 20)
+        var secondUser = new User('Bob', 30)
+
+        console.log(askQuestion.apply(firstUser, ['Hi', 'How are you?']))
+        console.log(askQuestion.apply(secondUser, ['Hello', 'How is it going?']))
+
+        console.log('')
+        /*
+        Задача №2
+        Создайте три объекта товаров.
+        Пример объектов:
+        {name: ‘Samsung Galaxy S20’, price: 800}
+        {name: ‘Xiaomi 11’, price: 600}
+        {name: ‘iPhone 12’, price: 1000}
+        Напишите функцию getDiscountAmount, которая будет принимать единственным параметром число (процент скидки)
+        и на основании свойства price (использовать this) будет возвращать сумму скидки для конкретного товара,
+        предварительно убедившись что price отличен от нуля.
+        При помощи метода bind создать функции расчета скидки для каждого объекта.
+        */
+        console.log('Task-2')
+
+        /*function Product(name, price) {
+            this.name = name
+            this.price = +price > 0 ? +price : 0
+        }*/
+
+        console.log('')
+
+        /*
+        Задача №3
+        Создайте массив figures, который будет состоять из объектов двух видов фигур: прямоугольников и кругов (10 элементов).
+        Примеры объектов:
+        •	Круг: {figureType: ‘circle’, radius: 5 }
+        •	Прямоугольник: {figureType: ‘rectangle’, weight: 100, height: 50}
+        Написать функцию, которая будет проверять поле figureType, высчитывать площадь фигуры
+        (реализовать с использованием this), для кругов округлить получившийся результат.
+        Написать цикл для массива figures и выводить в консоль следующую строку:
+        ‘Фигура №{номер фигуры} имеет площадь {результат вычислений}’
+        В цикле для каждого объекта вызвать ранее написанную функцию используя метод call.
+        */
+        console.log('Task-3')
+
+        console.log('')
+        /*
+        Задача №4
+        Создайте конструктор ProductCreator. Добавьте ему свойство instanceCounter и метод showProductCreatorInstanceCounter.
+        Метод showProductCreatorInstanceCounter должен наследоваться всеми потомками конструктора ProductCreator
+        и возвращать число созданных потомков этим конструктором.
+        При создании нового экземпляра конструктором ProductCreator счётчик instanceCounter должен увеличиваться на 1
+        и это значение должно быть записано в поле id создаваемого объекта.
+        */
+        console.log('Task-4')
+
+        console.log('')
+    </script>
+</body>
+</html>
