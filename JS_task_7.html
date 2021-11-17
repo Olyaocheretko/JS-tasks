@@ -56,13 +56,36 @@
         */
         console.log('Task-2')
 
-        /*function Product(name, price) {
+        function Product(name, price) {
             this.name = name
             this.price = +price > 0 ? +price : 0
-        }*/
+        }
+
+        function getDiscountAmount(discount) {
+            discount = !isNaN(discount) && discount <= 100 && discount >= 0 ? discount : 0
+            var price = typeof this.price !== 'undefined' && this.price > 0 ? this.price : 0
+
+            return price * discount / 100
+        }
+
+        var product1 = new Product('Samsung Galaxy S20', 800)
+        var product2 = new Product('Xiaomi 11', 600)
+        var product3 = new Product('iPhone 12', 1000)
+
+        prod1GetDiscount = getDiscountAmount.bind(product1)
+        prod2GetDiscount = getDiscountAmount.bind(product2)
+        prod3GetDiscount = getDiscountAmount.bind(product3)
+
+        console.log(`Discount for ${product1.name}:`)
+        console.log(prod1GetDiscount(10))
+
+        console.log(`Discount for ${product2.name}:`)
+        console.log(prod2GetDiscount(20))
+
+        console.log(`Discount for ${product3.name}:`)
+        console.log(prod3GetDiscount(30))
 
         console.log('')
-
         /*
         Задача №3
         Создайте массив figures, который будет состоять из объектов двух видов фигур: прямоугольников и кругов (10 элементов).
@@ -77,6 +100,33 @@
         */
         console.log('Task-3')
 
+        figures = [
+            {figureType: 'circle', radius: 5 },
+            {figureType: 'rectangle', weight: 100, height: 50},
+            {figureType: 'circle', radius: 4 },
+            {figureType: 'circle', radius: 7 },
+            {figureType: 'rectangle', weight: 20, height: 50},
+            {figureType: 'rectangle', weight: 100, height: 30},
+            {figureType: 'circle', radius: 3 },
+            {figureType: 'circle', radius: 1 },
+            {figureType: 'rectangle', weight: 40, height: 40},
+            {figureType: 'circle', radius: 8 },
+        ]
+
+        function figureArea() {
+            if (this.figureType === 'circle') {
+                return (this.radius * 3.14 * 3.14).toFixed(2)
+            }
+            else if (this.figureType === 'rectangle') {
+                return this.weight * this.height
+            }
+            return 0
+        }
+
+        figures.forEach(function(figure, i) {
+            console.log(`Figure №${i} area is ${figureArea.call(figure)}`)
+        })
+
         console.log('')
         /*
         Задача №4
@@ -88,7 +138,22 @@
         */
         console.log('Task-4')
 
-        console.log('')
+        function ProductCreator() {
+            this.instanceCounter = ++baseInstanceCounter
+            this.id = this.instanceCounter
+            this.showProductCreatorInstanceCounter = function () {
+                return baseInstanceCounter
+            }
+        }
+
+        var baseInstanceCounter = 0
+        prod1 = new ProductCreator()
+        prod2 = new ProductCreator()
+        prod3 = new ProductCreator()
+        prod4 = new ProductCreator()
+
+        console.log(prod2.showProductCreatorInstanceCounter())
+        console.log(prod2.id)
     </script>
 </body>
 </html>
