@@ -55,14 +55,15 @@
         */
         console.log('Task-3')
 
+        var counter = 10
+
         var decreasedNumber = ((function() {
-            var counter = 10
 
             return function() {
                 var message = counter ?  --counter : 'The counting is over'
                 console.log(message)
             }
-        })())
+        })(counter))
 
         for (var i = 0; i <= 12; i++) {
             decreasedNumber()

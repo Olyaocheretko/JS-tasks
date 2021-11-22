@@ -18,18 +18,18 @@
         Пример массива для преобразований:
         [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
         */
-        console.log("Task-1")
+        console.log('Task-1')
 
         var baseArray = [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
-        console.log("Base array:")
+        console.log('Base array:')
         console.log(baseArray)
 
         var updatedArray = changeNaNItemViaFor(baseArray)
-        console.log("Array after changing NaN to null via for:")
+        console.log('Array after changing NaN to null via for:')
         console.log(updatedArray)
 
         var updatedArrayViaWhile = changeNaNItemViaWhile(baseArray)
-        console.log("Array after changing NaN to null via while:")
+        console.log('Array after changing NaN to null via while:')
         console.log(updatedArrayViaWhile)
 
         function changeNaNItemViaFor(arrayItems) {
@@ -52,7 +52,7 @@
             return arrayItems
         }
 
-        console.log("")
+        console.log('')
 
 
         /*
@@ -67,10 +67,10 @@
         •	Реализовать с помощью цикла for
         •	Реализовать с помощью цикла while
         */
-        console.log("Task-2")
+        console.log('Task-2')
 
         var numberArray = [45, '246', 73, '4', 15, 36, 17, 89, '49', 167, 123]
-        console.log("Base array:")
+        console.log('Base array:')
         console.log(numberArray)
 
         var divider = 3
@@ -114,7 +114,7 @@
             return count
         }
 
-        console.log("")
+        console.log('')
 
 
         /*
@@ -131,10 +131,10 @@
         Пример массива:
         [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
         */
-        console.log("Task-3")
+        console.log('Task-3')
 
         var arrayOfItems = [16, true, 'MetraBit', NaN, {name: 'UserName', hobby: 'JS'}, 30, NaN, null, false, 'Vue']
-        console.log("Base array:")
+        console.log('Base array:')
         console.log(arrayOfItems)
 
         outputItemsQuantity(arrayOfItems)
@@ -148,19 +148,19 @@
 
             for (var item = 0; item < array.length; item++) {
                 switch (typeof array[item]) {
-                    case "string": {
+                    case 'string': {
                         stringCount ++
                         break
                     }
-                    case "number": {
+                    case 'number': {
                         numberCount ++
                         break
                     }
-                    case "boolean": {
+                    case 'boolean': {
                         booleanCount ++
                         break
                     }
-                    case "object": {
+                    case 'object': {
                         if(array[item] === null) {
                             nullCount ++
                         } else {
@@ -181,7 +181,7 @@
             console.log(`Object: ${objectCount}`)
         }
 
-        console.log("")
+        console.log('')
 
 
         /*
@@ -193,23 +193,23 @@
         •	Реализовать функцию используя function expression
         •	Использовать оператор return*!/
         */
-        console.log("Task-4")
+        console.log('Task-4')
 
-        var name = "Olya"
-        var message = "Hello"
+        var name = 'Olya'
+        var message = 'Hello'
 
         var getFullMessageViaFunctionExpression = function(name, message) {
-            return message + ", " + name
+            return `${message}, ${name}`
         }
 
-        console.log("Greeting message via function expression: " + getFullMessageViaFunctionExpression(name, message))
-        console.log("Greeting message via function declaration: " + getFullMessageViaFunctionDeclaration(name, message))
+        console.log(`Greeting message via function expression: ${getFullMessageViaFunctionExpression(name, message)}`)
+        console.log(`Greeting message via function declaration: ${getFullMessageViaFunctionDeclaration(name, message)}`)
 
         function getFullMessageViaFunctionDeclaration(name, message) {
-            return message + ", " + name
+            return `${message}, ${name}`
         }
 
-        console.log("")
+        console.log('')
     </script>
 </body>
 </html>
