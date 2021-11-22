@@ -95,7 +95,7 @@
             var lessonsCount = Math.floor(Math.random() * lessons.length)
             var favoriteLessons = lessons.slice(lessonsCount * -1)
 
-            if (lessonsCount === 0) {
+            if (lessonsCount === 0) {  //!lessonsCount
                 return `${studentName}: This student has no favorite lessons`
             }
             return `${studentName}: ${favoriteLessons.join(', ')}`
