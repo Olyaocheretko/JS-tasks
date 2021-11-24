@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_9</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        Напишите функцию, которая единственным аргументом будет принимать массив чисел.
+        Функция должна возвращать сумму квадратных корней для всех четных чисел массива.
+        Для реализации функционала функции используйте методы filter(), map() или reduce().
+        */
+        console.log('Task-1')
+
+        const numbersArray = [16, 1, 13, 16, 36]
+        console.log(`Calculated sum is: ${calculateSum(numbersArray)}`)
+
+        function calculateSum(numbersArray) {
+            let sum = 0
+
+            numbersArray.map(function(number) {
+                if (!isNaN(number) && !(number % 2)) {
+                    sum += Math.sqrt(number)
+                }
+            })
+
+            return sum
+        }
+
+        console.log('')
+        /*
+        Задача №2
+        Напишите функцию, которая единственным аргументом будет принимать массив чисел.
+        Функция должна возвращать число элементов, которое нужно сложить чтобы в сумме получилось больше 20-ти.
+        Если сумма всех чисел массива меньше 20, вывести сообщение об этом в консоль. Для реализации функционала функции используйте метод reduce().
+        */
+        console.log('Task-2')
+
+        const numbersArray2 = [2, 1, 18, 1, 2, 1]
+        console.log(countElements(numbersArray2))
+
+        function countElements(numbersArray) {
+            let elementsCount = 0
+            let result = 0
+
+            return numbersArray.reduce(function(accum, value, index, array) {
+                if (result > 20) {
+                    return `Elements count is: ${elementsCount}`
+                }
+
+                elementsCount++
+                result = accum + value
+
+                if (index === array.length) {
+                    return result <= 20 ? 'Sum is not greater than than 20' : `Elements count is: ${elementsCount}`
+                }
+
+                return result
+            }, 0);
+        }
+
+        console.log('')
+        /*
+        Задача №3
+        Напишите функцию, которая единственным аргументом будет принимать массив строк.
+        Функция должна возвращать массив со строками, длина которых больше 5-ти символов.
+        •	Для реализации функционала функции используйте метод filter()
+        •	Реализуйте функционал используя метод reduce().
+        */
+        console.log('Task-3')
+
+        const stringsArray = ['Afb3ug', 'grg', 'grfeainf', 'fd', '', 'ggg']
+
+        console.log(`New array via Filter: ${getBigStringsFilter(stringsArray)}`)
+        console.log(`New array via Reduce: ${getBigStringsReduce(stringsArray)}`)
+
+        function getBigStringsFilter(stringsArray) {
+            return stringsArray.filter(string => string.length > 5);
+        }
+
+        function getBigStringsReduce(stringsArray) {
+            return stringsArray.reduce(function(accum, value) {
+                if (value.length > 5) {
+                    accum.push(value)
+                }
+
+                return accum
+            }, [])
+        }
+
+        console.log('')
+        /*
+        Задача №4
+        Напишите функцию, которая единственным аргументом будет принимать массив чисел, одним элементом которого должен быть 0.
+        Функция должна возвращать сумму первых N элементов до первого нуля. Если в массиве нет элементов 0, то возвращать строку
+        ‘Переданный массив не содержит нулей’. Для реализации функционала функции используйте метод forEach() или reduce().
+        */
+        console.log('Task-4')
+
+        const numbersArray3 = [1, 2, 5, 11, 0, 7]
+        console.log(`The sum of first elements before zero: ${getSumBeforeZero(numbersArray3)}`)
+
+        function getSumBeforeZero(numbersArray) {
+            let sum = 0
+            let zeroFound = false
+
+            numbersArray.forEach(function(number) {
+                number && !zeroFound ? sum += number : zeroFound = true
+            })
+
+            return zeroFound ? sum : 'Zero not found in array'
+        }
+
+        console.log('')
+        /*
+        Задача №5
+        Написать четыре функции, каждая из которых будут в качестве аргумента принимать массив studentsMarks и возвращать указанные ниже значения:
+        •	Массив с именами студентов, записанными заглавными буквами. Для реализации функционала функции используйте метод map().
+        •	Массив с именами студентов, набравших более 50 баллов и имеющих id больше 120. Для реализации функционала функции используйте метод filter()
+        •	Общую сумму баллов студентов. Для реализации функционала функции используйте метод reduce().
+        •	Массив с именами студентов, у которых баллы больше 50, после начисления поощрения в 15 баллов. Для реализации функционала функции используйте метод reduce().
+        Пример массива:
+        const studentsMarks  = [
+      	 {name: 'John', id: 123, mark : 98 },
+         {name: 'Baba', id: 101, mark : 23 },
+         {name: 'yaga', id: 200, mark : 45 },
+         {name: 'Wick', id: 115, mark : 75 }
+        ]
+        */
+        console.log('Task-5')
+
+        const studentsMarks  = [
+            {name: 'John', id: 123, mark : 98 },
+            {name: 'Baba', id: 101, mark : 23 },
+            {name: 'yaga', id: 200, mark : 45 },
+            {name: 'Wick', id: 115, mark : 75 }
+        ]
+        const bonusMark = 15
+
+        console.log(`Student names with first capital letter: ${getNamesFirstCharUpper(studentsMarks)}`)
+        console.log(`Student names filtered by marks and id: ${getNamesFilteredByMarksAndId(studentsMarks)}`)
+        console.log(`Students' marks sum is: ${getMarksSum(studentsMarks)}`)
+        console.log(`Student names filtered by gross marks: ${getNamesFilteredByGrossMarks(studentsMarks,bonusMark)}`)
+
+        function getNamesFirstCharUpper(marks) {
+            return marks.map(function(mark) {
+                return mark.name ? mark.name.charAt(0).toUpperCase() + mark.name.slice(1) : ''
+            })
+        }
+
+        function getNamesFilteredByMarksAndId(marks) {
+            let filteredMarks = marks.filter(function(mark) {
+                return mark.id && mark.mark > 50 && mark.id > 120
+            })
+
+            return getNamesFirstCharUpper(filteredMarks)
+        }
+
+        function getMarksSum(marks) {
+            return marks.reduce(function(accum, value) {
+                return value.mark ? accum + value.mark : accum;
+            }, 0)
+        }
+
+        function getNamesFilteredByGrossMarks(marks, bonusMark) {
+            let filteredMarks =  marks.reduce(function(accum, value) {
+                if (value.mark && (value.mark + bonusMark) > 50) {
+                    accum.push(value)
+                }
+
+                return accum
+            }, [])
+
+            return getNamesFirstCharUpper(filteredMarks)
+        }
+
+        console.log('')
+        /*
+        Задача №6
+        Напишите функцию, которая единственным аргументом будет принимать массив чисел.
+        Функция должна возвращать массив его сумм каждого элемента и всех стоящих перед ним чисел.
+        Для реализации функционала функции используйте метод .forEach().
+        */
+        console.log('Task-6')
+
+        const numbersArray4 = [1, 2, 5, 11, 0, 7]
+        console.log(getSumCurrAndBefore(numbersArray4))
+
+        function getSumCurrAndBefore(numbersArray) {
+            let sum = 0
+            let sumNumbersArray = []
+
+            numbersArray.forEach(function (number) {
+                if (!isNaN(number)) {
+
+                    return sumNumbersArray.push(sum += number)
+                }
+            })
+
+            return sumNumbersArray
+        }
+
+        console.log('')
+        /*
+        Задача №7
+        Напишите функцию, которая принимает массив в качестве единственного аргумента и возвращает полученный массив без повторяющихся значений.
+        Для реализации функционала функции используйте методы .filter() и .indexOf().
+        */
+        console.log('Task-7')
+
+        const baseArray = [1, 'hello', 2, 7, 11, 'hello', 0, 7,'hello', 7]
+        console.log(getUniqueArray(baseArray))
+
+        function getUniqueArray(baseArray) {
+            return baseArray.filter((element, index) => baseArray.indexOf(element) === index)
+        }
+
+        console.log('')
+        /*
+        Задача №8
+        Напишите функцию, которая принимает массив с вложенными массивами и возвращает одномерный (плоский) массив.
+        */
+        console.log('Task-8')
+
+        const baseArray2 = [1, 'hello', [2, 7, 11], 'hello', [0, 7],'hello', 7]
+        console.log(`Received array: ${getOneArray(baseArray2)}`)
+
+        function getOneArray(baseArray) {
+           return baseArray.flat()
+        }
+
+        console.log('')
+        /*
+        Задача №9
+        Напишите функцию, которая в качестве аргументов принимает массив элементов и число.
+        Функция должна возвращать массив с массивами из элементов переданного массива.
+        Длина внутренних массивов должна быть равной числу, переданному в качестве аргумента.
+        Если длина исходного массива не кратна переданному числу, то оставшиеся элементы также поместить в массив.
+        */
+        /*console.log('Task-9')
+
+        const baseArray3 = [1, 'hello', 2, 7, 11, 'hello', 0, 7,'hello', 7]
+        const number = 5
+        console.log(`Received array: ${getArrayInArray(baseArray3)}`)
+
+        function getArrayInArray(baseArray, number) {
+
+        }
+*/
+        console.log('')
+        /*
+        Задача №10
+        Напишите функцию, которая в качестве единственного аргумента принимает массив объектов с информацией о работниках.
+        Пример массива:
+        [
+          {
+            name: 'Sasha',
+            age: 45,
+            salary: 1900,
+          },
+          {
+            name: 'Max',
+            age: 21,
+            salary: 1500,
+           },
+           {
+            name: 'Nikita',
+            age: 29,
+            salary: 800,
+            },
+           {
+            name: 'Sergey',
+            age: 32,
+            salary: 2300,
+           }
+          ]
+          Функция должна отсортировать данный массив по возрастанию зарплаты и вернуть получившийся массив.
+          Для реализации функционала функции используйте метод .sort().
+         */
+        console.log('Task-10')
+
+        const baseArrayOfObjects = [
+            {
+                name: 'Sasha',
+                age: 45,
+                salary: 1900,
+            },
+            {
+                name: 'Max',
+                age: 21,
+                salary: 1500,
+            },
+            {
+                name: 'Nikita',
+                age: 29,
+                salary: 800,
+            },
+            {
+                name: 'Sergey',
+                age: 32,
+                salary: 2300,
+            }
+        ]
+
+        const sortedBySalaryArrayOfObjects = function getSortedBySalaryArray(baseArrayOfObjects) {
+            return baseArrayOfObjects.sort(function (a,b) {
+               return a.salary - b.salary
+           })
+        }
+
+        console.log('Sorted by salary array is:')
+        console.log(sortedBySalaryArrayOfObjects(baseArrayOfObjects))
+
+        console.log('')
+        /*
+        Задача №11
+        Написать функцию, которая будет принимать массив в качестве аргумента и возвращать отсортированный массив по убыванию возраста.
+        Для отладки кода использовать пример массива из задачи №10. Для реализации функционала функции используйте метод .sort().
+         */
+        console.log('Task-11')
+
+        const baseArrayOfObjects2 = baseArrayOfObjects.slice(0)
+
+        const sortedByAgeArrayOfObjects = function getSortedArray(baseArrayOfObjects) {
+            return baseArrayOfObjects.sort(function (a,b) {
+                return b.age - a.age
+            })
+        }
+
+        console.log('Sorted by age array is:')
+        console.log(sortedByAgeArrayOfObjects(baseArrayOfObjects2))
+
+        console.log('')
+        /*
+        Задача №12
+        Напишите функцию, которая принимает массив отсортированных работников по зарплате и число. Для отладки кода использовать результат работы функции из задачи №10.
+        Функция должна возвращать первый найденный объект массива, у которого зарплата меньше, чем переданное в аргументы число.
+        Если в массиве нет элементов удовлетворяющих проверке, возвращать сообщение
+        ‘Работников с зарплатой меньше { переданное число}$ не найдено’.  Для реализации функционала функции используйте метод .find().
+         */
+        console.log('Task-12')
+
+        const salary = 810
+
+        const lessSalaryWorker = function getSortedArray(arrayOfObjects, salary) {
+            const _lessSalaryWorker = arrayOfObjects.find ((item) => item.salary < salary)
+
+            return _lessSalaryWorker? _lessSalaryWorker : `There aren't workers with the salary less than ${salary}`
+        }
+
+        console.log(lessSalaryWorker(baseArrayOfObjects, salary))
+
+        console.log('')
+    </script>
+</body>
+</html>
