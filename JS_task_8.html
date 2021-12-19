@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_8</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №3
+        Напишите функцию, которая через prompt, предлагает пользователю сделать ставку (ввести сумму денег, типа ставка на спорт),
+        после ввода числа в prompt, выведите в консоль сообщение ‘Ваша ставка принята’.
+        Сгенерируйте случайное число в диапазоне от -5 до 5.
+        Через 3 секунды выведите сообщение в консоль информацию о том, что он “выиграл” или “проиграл” с такой логикой:
+        если случайное число отрицательное или равно 0 - то он "не угадал" со своей ставкой, выведите в консоль сообщение ‘Вы проиграли. Ваши деньги сгорели.’
+        Если число положительное, то выведите в консоль сообщение ‘Вы выиграли.
+        Ваш выигрыш составляет { сумма выигрыша }’. Для расчёта суммы выигрыша нужно умножить сумму ставки на случайно сгенерированное число в диапазоне от -5 до 5.
+        */
+        console.log('Task-3')
+
+        function makeBet() {
+            const bet = +prompt('Please place your bet')
+            console.log('Your bet has been placed!')
+            const min = -5
+            const max = 5
+            const luckyNumber =  Math.floor(Math.random() * (max + 1 - min)) + min
+            console.log(`Lucky number is: ${luckyNumber}`)
+
+            setTimeout(function() {
+                if (luckyNumber <= 0) {
+                    console.log('You lose. Your money burned')
+                }
+                else {
+                    let prize = Math.round(luckyNumber * bet * 100)/100
+                    console.log(`You won! Your prize is ${prize}`)
+                }
+            }, 3000)
+        }
+        makeBet()
+
+        console.log('')
+</script>
+</body>
+</html>

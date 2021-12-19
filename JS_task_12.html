@@ -20,13 +20,15 @@
                 '8147814781478147'
             ]
         Перепишите функцию из задачи №3, домашнего задания №8 с использованием Promise.
-            В новой функции вам нужно завернуть setTimeout в Promise и вернуть получившийся Promise из функции (сообщение ‘Ваша ставка принята’ из функции возвращать не нужно). В setTimeout вывод сообщений ‘Вы выиграли. Ваш выигрыш составляет….’ и ‘Вы проиграли. Ваши деньги сгорели.’ заменить resolve и reject.
+            В новой функции вам нужно завернуть setTimeout в Promise и вернуть получившийся Promise из функции (сообщение ‘Ваша ставка принята’ из функции возвращать не нужно).
+            В setTimeout вывод сообщений ‘Вы выиграли. Ваш выигрыш составляет….’ и ‘Вы проиграли. Ваши деньги сгорели.’ заменить resolve и reject.
             В reject передавать строку 'Вы проиграли. Ваши деньги сгорели.'
-        В reject передавать объект со следующими полями:
-            message: `Вы выиграли. Ваш выигрыш составляет {сумма выигрыша}`,
-                value: сумма выигрыша (число)
-        Напишите функцию для вывода выигрыша на карту. Функция должна принимать в качестве единственного аргумента сумму выигрыша. При старте функции, попросите пользователя ввести номер карты, на которую он хочет вывести свой выигрыш. Для запроса номера карты используйте prompt. После получения номера карты создайте Promise и верните его из функции. В созданном Promise с помощью setTimeout сымитируйте задержку при запросе на сервер (время задержки 3 секунды). В setTimeout реализуйте проверку наличия введённой карты в массиве cards. Для вывода результата используйте resolve, reject и передавайте в них следующие значения.
-            В reject - 'Пользователя с таким номером карты не существует'
+        В reject передавать объект со следующими полями: message: `Вы выиграли. Ваш выигрыш составляет {сумма выигрыша}`, value: сумма выигрыша (число)
+        Напишите функцию для вывода выигрыша на карту. Функция должна принимать в качестве единственного аргумента сумму выигрыша.
+        При старте функции, попросите пользователя ввести номер карты, на которую он хочет вывести свой выигрыш. Для запроса номера карты используйте prompt.
+        После получения номера карты создайте Promise и верните его из функции. В созданном Promise с помощью setTimeout сымитируйте задержку при запросе на сервер (время задержки 3 секунды).
+        В setTimeout реализуйте проверку наличия введённой карты в массиве cards. Для вывода результата используйте resolve, reject и передавайте в них следующие значения.
+        В reject - 'Пользователя с таким номером карты не существует'.
         В resolve - 'Ваш выигрыш в размере {сумма выигрыша из аргумента}, был выведен на карту с номером {введённый номер карты}. Поздравляем!'
         Вызовите функцию для создания ставки. Т.к. теперь функция возвращает Promise, вам нужно использовать метод then() для получения результата работы функции.
         Используйте .then() после вызова функции для создания ставки, передайте в него 2 функции. Первая функция для обработки resolve, вторая функция для обработки reject.
@@ -35,6 +37,48 @@
             Т.к. функция для вывода денег возвращает Promise, то для получения результата её работы нам нужно использовать метод then() ещё раз (создать цепочку из then()).
         После вызова первого then(), вызовите метод then() второй раз и передайте в него 2 функции для обработки resolve и reject. Каждая функция должна выводить в консоль полученный результат.
         */
+        let cards = [
+            '4567456745674567',
+            '4282428242824282',
+            '7224722472247224',
+            '8147814781478147'
+        ]
+        makeBet()
+
+        function makeBet() {
+            const bet = +prompt('Please place your bet')
+            const min = -5
+            const max = 5
+            const luckyNumber =  Math.floor(Math.random() * (max + 1 - min)) + min
+            console.log(`Lucky number is: ${luckyNumber}`)
+            let prize = Math.round(luckyNumber * bet * 100)/100
+            let winMessage = {
+                message: `You won! Your prize is ${prize}`,
+                value: prize
+            }
+
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    luckyNumber > 0 ? resolve(winMessage) : reject('You lose. Your money burned')
+                }, 3000)
+            })
+                .then((response) => {
+                    console.log(response.message)
+                    getPrize(response.value)
+                })
+                .catch((error) => console.log(error))
+        }
+
+        function getPrize(prize) {
+            const bankCardNumber = +prompt('Please enter your bank card number')
+            return new Promise(function (resolve, reject) {
+                setTimeout(function() {
+                    cards.includes(`${bankCardNumber}`)? resolve(`Your prize ${prize} was transferred on the bank card ${bankCardNumber}. Congratulations!`) : reject(`User with this card number doesn't exist`)
+                }, 3000)
+            })
+                .then((response) => console.log(response))
+                .catch((error) => console.log(error))
+        }
 
         /*
         Задача №2
@@ -51,7 +95,7 @@
         */
         const url = 'https://jsonplaceholder.typicode.com/photos'
         const requiredPhotoIds = [1, 3, 5, 7, 9]
-        const promise = getPhoto(url)
+        getPhoto(url)
 
         function getPhoto(url) {
             return new Promise(function (resolve, reject) {
@@ -62,19 +106,19 @@
                    event.target.status === 200 ? resolve(JSON.parse(this.response)) : reject(`Something went wrong`)
                 }
             })
+                .then((response) => {
+                    let filteredArray = getFilteredArray(response, requiredPhotoIds)
+                    renderImages(filteredArray)
+                })
+                .catch((error) => console.log(error))
         }
-        promise.then((response) => {
-            let filteredArray = getFilteredArray(response, requiredPhotoIds)
-            renderImages(filteredArray)
-        })
-        .catch((error) => console.log(error))
 
         function getFilteredArray(rawArray, requiredPhotoIds) {
             let filteredArray = []
             for(let i = 0; i < requiredPhotoIds.length; i++) {
-                filteredArray.push(rawArray.filter(item => item.id === requiredPhotoIds[i]))
+                filteredArray.push(rawArray.find(item => item.id === requiredPhotoIds[i]))
             }
-            return filteredArray.flat()
+            return filteredArray
         }
 
         function renderImages(filteredArray) {
