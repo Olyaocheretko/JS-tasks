@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS_task_15</title>
+</head>
+<body>
+    <script>
+        /*
+        Задача №1
+        Создайте объект phone со следующими полями:
+            Name
+            Price
+            Discount
+            Quantity
+            Weight
+        Значения укачать произвольные. Для нескольких полей задайте значение null.
+        Напишите функцию, которая в качестве единственного аргумента принимает объект.
+        Для того, чтобы не изменить значения полученного в аргументах объекта, внутри функции, создайте переменную для копирования объекта
+        и создайте копию полученного в аргументах объекта с использованием метода Object.assign()
+        При помощи метода Object.entries() создайте массив с элементами типа: [‘ключ’, ‘значение’].
+        Отфильтруйте данный массив так, чтобы в нём остались только элементы, у которых ‘значение’ нe равно null.
+        Из отфильтрованного массива создайте объект, который будет состоять только из полей, значение которых не равно null.
+        Функция должна возвращать получившийся объект.
+        Вызовите функцию с объектом phone для демонстрации правильной работы функции.
+        Реализуйте копирование полученного в аргументах объекта в переменную используя деструктурирующее присваивание.
+        */
+        console.log('Task-1')
+
+        const phone = {
+            Name: 'Samsung',
+            Price: null,
+            Discount: 30,
+            Quantity: null,
+            Weight: 80
+        }
+        console.log('Base product:')
+        console.log(phone)
+        console.log('Filtered product:')
+        console.log(getFilteredProduct(phone))
+
+        function getFilteredProduct(product) {
+            let productCopy = Object.assign({...product})
+            let productArray = Object.entries(productCopy)
+            let filteredProduct = []
+
+            productArray.forEach(function (array) {
+                if (array[1] !== null) {
+                    filteredProduct.push(array)
+                }
+            })
+            filteredProduct = Object.fromEntries(filteredProduct);
+
+            return filteredProduct
+        }
+
+        console.log('')
+        /*
+        Задача №2
+        Создайте ещё один объект, имя которого будет laptop. Объект должен содержать следующие поля:
+            Name
+            Price
+            Discount
+            Width
+            Height
+            Diagonal
+        Значения указать произвольные.
+        Напишите функцию, которая в качестве аргументов принимает два объекта.
+        Функция должна найти не совпадающие имена полей двух объектов.
+        Если имена полей первого объекта одинаковы с именами полей второго объекта, вывести true.  Если есть одно поле или более,
+        которые встречается только в одном из двух объектов, вывести массив имен несовпадающих полей.
+        Для нахождения массива ключей использовать Object.keys.
+        Вызовите функцию с объектами phone и laptop для демонстрации правильной работы функции.
+        */
+        console.log('Task-2')
+
+        const laptop = {
+            Name: 'ASUS',
+            Price: 35000,
+            Discount: 30,
+            Width: 27,
+            Height: 2,
+            Diagonal: 14
+        }
+        console.log(checkKeys(laptop, phone))
+
+        function checkKeys(laptop, phone) {
+            let laptopKeys = Object.keys(laptop)
+            let phoneKeys = Object.keys(phone)
+            let uniqueKeys = []
+
+            laptopKeys.forEach(function(laptopKey) {
+                if(!(phoneKeys.includes(laptopKey))) {
+                    uniqueKeys.push(laptopKey)
+                }
+            })
+            phoneKeys.forEach(function(phoneKey) {
+                if(!(laptopKeys.includes(phoneKey))) {
+                    uniqueKeys.push(phoneKey)
+                }
+            })
+
+            return uniqueKeys.length ? uniqueKeys : true
+        }
+        console.log('')
+        /*
+        Задача №3
+        Напишите функцию, которая в качестве единственного аргумента принимает объект. При помощи метода Object.values() получите массив значений всех полей объекта.
+        Произведите проверку полученного массива, если получившийся массив пуст, то функция должна вернуть строку ‘Object is empty’. В ином случаи создайте переменные firstValue, secondValue и restValues и с использованием деструктирующего присваивания установите им следующие значения:
+        firstValue – первый элемент массива
+        secondValue – второй элемент массива
+        restValues – оставшиеся элементы массива.
+        Присваивание реализовать одной строкой. Переменной restValues установить дефолтное значение, равное пустому массиву.
+        Из созданных переменных (firstValue, secondValue и restValues) создайте объект типа:
+        {
+          firstValue: значение переменной firstValue,
+          secondValue: значение переменной secondValue,
+          restValues: значение переменной restValues
+        }
+        Функция должна возвращать созданный объект с 3-мя полями.
+        Вызовите функцию с объектами laptop для демонстрации правильной работы функции.
+        */
+        console.log('Task-3')
+
+        console.log('')
+    </script>
+</body>
+</html>
