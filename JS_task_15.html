@@ -45,16 +45,9 @@
         function getFilteredProduct(product) {
             let productCopy = Object.assign({...product})
             let productArray = Object.entries(productCopy)
-            let filteredProduct = []
+            let filteredProduct = productArray.filter(element => element[1] !== null)
 
-            productArray.forEach(function (array) {
-                if (array[1] !== null) {
-                    filteredProduct.push(array)
-                }
-            })
-            filteredProduct = Object.fromEntries(filteredProduct);
-
-            return filteredProduct
+            return Object.fromEntries(filteredProduct);
         }
 
         console.log('')
@@ -85,21 +78,21 @@
             Height: 2,
             Diagonal: 14
         }
-        console.log(checkKeys(laptop, phone))
+        console.log(compareKeys(laptop, phone))
 
-        function checkKeys(laptop, phone) {
-            let laptopKeys = Object.keys(laptop)
-            let phoneKeys = Object.keys(phone)
+        function compareKeys(product1, product2) {
+            let product1Keys = Object.keys(product1)
+            let product2Keys = Object.keys(product2)
             let uniqueKeys = []
 
-            laptopKeys.forEach(function(laptopKey) {
-                if(!(phoneKeys.includes(laptopKey))) {
-                    uniqueKeys.push(laptopKey)
+            product1Keys.forEach(function(product1Key) {
+                if(!(product2Keys.includes(product1Key))) {
+                    uniqueKeys.push(product1Key)
                 }
             })
-            phoneKeys.forEach(function(phoneKey) {
-                if(!(laptopKeys.includes(phoneKey))) {
-                    uniqueKeys.push(phoneKey)
+            product2Keys.forEach(function(product2Key) {
+                if(!(product1Keys.includes(product2Key))) {
+                    uniqueKeys.push(product2Key)
                 }
             })
 
@@ -109,7 +102,8 @@
         /*
         Задача №3
         Напишите функцию, которая в качестве единственного аргумента принимает объект. При помощи метода Object.values() получите массив значений всех полей объекта.
-        Произведите проверку полученного массива, если получившийся массив пуст, то функция должна вернуть строку ‘Object is empty’. В ином случаи создайте переменные firstValue, secondValue и restValues и с использованием деструктирующего присваивания установите им следующие значения:
+        Произведите проверку полученного массива, если получившийся массив пуст, то функция должна вернуть строку ‘Object is empty’.
+        В ином случаи создайте переменные firstValue, secondValue и restValues и с использованием деструктирующего присваивания установите им следующие значения:
         firstValue – первый элемент массива
         secondValue – второй элемент массива
         restValues – оставшиеся элементы массива.
@@ -125,6 +119,19 @@
         */
         console.log('Task-3')
 
+        console.log(getObject(laptop))
+
+        function getObject(product) {
+            let values = Object.values(product)
+            let [firstValue, secondValue = 'no value', ...restValues] = values
+            let updatedProduct = {
+                firstValue: firstValue,
+                secondValue: secondValue,
+                restValues: restValues
+            }
+
+            return !values.length? 'Object is empty' : updatedProduct
+        }
         console.log('')
     </script>
 </body>
