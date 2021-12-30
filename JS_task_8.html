@@ -10,6 +10,40 @@
 <body>
     <script>
         /*
+        Задача №1
+        Напишите функцию, которая последовательно выводит в консоль числа от 1 до 20, с интервалом между числами 1000мс.
+        То есть, весь вывод должен занимать 2000мс, в течение которых каждые 1000мс в консоли появляется очередное число.
+        •	Реализовать с помощью setInterval
+        •	Реализовать с помощью setTimeout вместо setInterval
+        */
+        console.log('Task-1')
+
+        function countToTwentySetInterval() {
+            let i = 1
+            let timerId = setInterval(function () {
+                console.log(i++)
+
+                if (i > 20) {
+                    clearInterval(timerId)
+                }
+            }, 1000)
+        }
+        //countToTwentySetInterval()
+
+        function countToTwentySetTimeout() {
+            let i = 1
+            let timerId = setTimeout(function printNumber () {
+                console.log(i++)
+
+                if (i <= 20) {
+                    timerId = setTimeout(printNumber, 1000);
+                }
+            }, 1000)
+        }
+        countToTwentySetTimeout()
+
+        console.log('')
+        /*
         Задача №3
         Напишите функцию, которая через prompt, предлагает пользователю сделать ставку (ввести сумму денег, типа ставка на спорт),
         после ввода числа в prompt, выведите в консоль сообщение ‘Ваша ставка принята’.
@@ -19,7 +53,7 @@
         Если число положительное, то выведите в консоль сообщение ‘Вы выиграли.
         Ваш выигрыш составляет { сумма выигрыша }’. Для расчёта суммы выигрыша нужно умножить сумму ставки на случайно сгенерированное число в диапазоне от -5 до 5.
         */
-        console.log('Task-3')
+        /*console.log('Task-3')
 
         function makeBet() {
             const bet = +prompt('Please place your bet')
@@ -41,7 +75,7 @@
         }
         makeBet()
 
-        console.log('')
+        console.log('')*/
 </script>
 </body>
 </html>
